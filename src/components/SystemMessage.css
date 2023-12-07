@@ -1,0 +1,13 @@
+/**/
+
+
+.system-cursor-1, .system-cursor-2{
+	font-size: 28px;
+	line-height: 14px;
+}
+.system-cursor-1{
+    color: #EB008B;
+}
+.system-cursor-2{
+    color: #00BFF2;
+}

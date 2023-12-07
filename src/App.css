@@ -1,0 +1,199 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+
+/* pink:EB008B blue:00BFF2 dark:06286A */
+.page-title {
+  height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fdfdfd;
+    color: #06286A;
+    font-size: 18px;
+    position: relative;
+    padding: 5px 20px;
+}
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+/*    padding: 20px;*/
+/*    background-color: #f2f2f2;*/
+  }
+
+  .main-logo {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+    padding: 4px 3px 3px 3px;
+    background: white;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    margin-top: -5px;
+  }
+
+  .title {
+    font-size: 16px; /* Adjust the font size as needed */
+    font-weight: bold;
+  }
+
+.plane-logo {
+    padding: 12px 3px 8px 11px;
+    margin: 20px;
+    background: white;
+    border-radius: 50px;
+    border: 1px solid #ddd
+}
+
+.plane-logo img{
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.empty-chat {
+  display: flex;
+/*  opacity:0;*/
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 18px;
+  color: #555;
+}
+
+.chat-container {
+  height: calc(100vh - 65px);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #fdfdfd;
+}
+
+.chat-message.user {
+  background-color: #7fc4fd;
+  align-self: flex-start;
+}
+
+.chat-message.gpt {
+  background-color: #e0e0e0;
+  align-self: flex-end;
+}
+
+.chat-input-ctn {
+    display: flex;
+    padding: 10px;
+    background-color: #fdfdfd;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-input{
+    width: 768px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    padding: 7px;
+}
+.chat-input input {
+  flex: 1 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  outline: none !important;
+}
+
+.chat-input button {
+  font-size: 20px;
+  padding: 8px 10px 7px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
+
+.chat-input button.active{
+  cursor: pointer;
+  background-color: #06286A;
+}
+
+.chat-input button.not-active{
+  background-color: #ddd;
+}
+
+/* Aniumation */
+
+    @keyframes slideLeft {
+      from {
+        transform: translateX(-80%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideRight {
+      from {
+        transform: translateX(80%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+
+    @keyframes slideTop {
+      from {
+        transform: translateY(-30%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideBottom {
+      from {
+        transform: translateY(10%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .anim-appear {
+      animation: appear 1s ease-out; /* Adjust the animation duration and timing function as needed */
+    }
+
+
+    .anim-bottom {
+      animation: slideBottom 0.3s ease-out; /* Adjust the animation duration and timing function as needed */
+    }
+
+    .anim-left {
+      animation: slideLeft 0.2s ease-out; /* Adjust the animation duration and timing function as needed */
+    }
