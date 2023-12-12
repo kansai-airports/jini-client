@@ -1,14 +1,25 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faUser } from '@fortawesome/free-solid-svg-icons';
 import UserMessage from './components/UserMessage';
 import SystemMessage from './components/SystemMessage';
 import LoadingMessage from './components/LoadingMessage';
+import BotMessage from './components/BotMessage';
 import { predict } from './helpers/llm'
 
 import './App.css';
 
-const msg_main = 'お手伝い致します';
+const lang = 'en';
+const msg = {
+  main:{
+    en:'How can i help you?',
+    jp:'お手伝い致します',
+  },
+  llm_error:{
+    en: 'An error occured in the LLM engine. Please contact your IT Service Desk or try again later',
+    jp: 'エラー'
+  }
+}
 // const msg_main = '何か手伝いましょうか？';
 
 const ChatGPTChat = () => {
@@ -16,7 +27,7 @@ const ChatGPTChat = () => {
   const [input, setInput] = useState('');
   const [btnActive, setBtnActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [username, setUsername] = useState('Pascal');
+  const [username, setUsername] = useState('Pascal Portalier');
   const inputRef = useRef();
 
   useEffect(() => {
@@ -46,20 +57,17 @@ const ChatGPTChat = () => {
       { text: 'Loading...', kind:'loading' },
     ]);
 
-
-    const result = await predict();
-
-    console.log('result');
+    const result = await predict(_input);
     console.log(result);
-    // Simulate GPT response delay (replace with actual API call)
-    // setTimeout(() => {
-    //   const gptResponse = 'This is a sample response from ChatGPT.';
-    //   setMessages((prevMessages) => [
-    //     ...prevMessages.slice(0, -1),
-    //     { text: gptResponse, kind:'system' },
-    //   ]);
-    //   setIsLoading(false);
-    // }, 3000);
+    const response = result.error ? msg.llm_error[lang] : result.payload;
+    const kind = result.error ? 'system' : 'bot';
+
+    setMessages((prevMessages) => [
+      ...prevMessages.slice(0, -1),
+      { text: response, kind: kind },
+    ]);
+    setIsLoading(false);
+
   };
 
   const handleInputChange = (e) => {
@@ -81,7 +89,9 @@ const ChatGPTChat = () => {
             <div className="title">Jini</div>
           </div>
           {/*<img src="logo.gif" className="main-logo" />jini </div>*/}
-          <div> {username} </div>
+          <div className="logo-container">
+            <div className="main-username"> <FontAwesomeIcon icon={faUser} className="user-icon"/>{username}</div>
+          </div>
       </div>
       <div className="chat-container">
         <div className="chat-messages">
@@ -93,15 +103,19 @@ const ChatGPTChat = () => {
                 src="logo.gif"
                 alt="plane-logo"
               /></div>
-              <div style={{color:'#0c2a4d'}}>{msg_main}</div>
+              <div style={{color:'#0c2a4d'}}>{msg.main[lang]}</div>
             </div>
           ) : (
             messages.map((message, index) => (
               message.kind == 'user' ? 
                 <UserMessage key={index} username={username} timestamp={message.timestamp} content={message.text} /> 
-              : message.kind == 'system' ? 
-                <SystemMessage key={index} content={message.text} /> 
-              : <LoadingMessage key={index}/>
+              : message.kind == 'bot' ?
+                <BotMessage key={index} content={message.text} />
+              : message.kind == 'system' ?
+                <SystemMessage key={index} content={message.text} />
+              : message.kind == 'loading' ?
+                <LoadingMessage key={index}/>
+              : null
 
             ))
           )}

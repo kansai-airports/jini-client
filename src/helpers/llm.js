@@ -1,12 +1,12 @@
 
 const url = 'http://127.0.0.1:3001/query';
 
-const predict = async function(params) {
+const predict = async function(prompt) {
 
-    const body = {
-        instruction:'predict',
-        payload: {prompt:prompt},
-    }
+  const body = {
+    instruction:'predict',
+    payload: {prompt:prompt},
+  }
 
   try {
     const response = await fetch(url, {
@@ -23,9 +23,10 @@ const predict = async function(params) {
 
     const data = await response.json();
     return data;
+
   } catch (error) {
     console.error('Error:', error);
-    throw error; 
+    return Promise.resolve({error:1, payload:error})
   }
 }
 

@@ -1,0 +1,24 @@
+/**/
+
+
+.system-cursor-1, .system-cursor-2{
+	font-size: 24px;
+	line-height: 12px;
+	maring-top: 2px;
+	animation: blink 0.5s linear infinite;
+}
+.system-cursor-1{
+    color: #EB008B;
+}
+.system-cursor-2{
+    color: #00BFF2;
+}
+
+ @keyframes blink {
+
+      50% {
+        opacity: 0.3;
+      }
+
+    }
+
