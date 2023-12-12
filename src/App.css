@@ -29,12 +29,14 @@ body {
   .main-logo {
     width: 30px;
     height: auto;
-    margin-right: 10px;
+    margin-right: 20px;
     padding: 4px 3px 3px 3px;
     background: white;
     border-radius: 50px;
     border: 1px solid #ddd;
-    margin-top: -5px;
+/*    margin-top: -5px;*/
+    box-shadow: -10px 0 12px -2px rgba(235,0,139,0.2), 10px 0 12px -2px rgba(0,191,242,0.2);
+    animation: rotateShadowSmall 25s linear infinite; 
   }
 
   .title {
@@ -74,6 +76,20 @@ body {
   75% {box-shadow: 12px 0 15px -2px rgba(235,0,139,0.14), -11px 1px 12px 0px rgba(0,191,242,0.18);}
   87% {box-shadow: -4px 8px 14px -3px rgba(235,0,139,0.18), -8px -6px 15px -1px rgba(0,191,242,0.2);}
   100%{box-shadow: -10px 0 17px -3px rgba(235,0,139,0.2), 10px 0 17px -3px rgba(0,191,242,0.2);}
+}
+
+@keyframes rotateShadowSmall {
+
+
+  0%{box-shadow: -7px 0 6px -3px rgba(235,0,139,0.2), 7px 0 6px -3px rgba(0,191,242,0.2);}
+  12% {box-shadow: 1px -6px 8px -3px rgba(235,0,139,0.18), 0px 7px 14px -3px rgba(0,191,242,0.2);}
+  25% {box-shadow: 7px 0 13px -2px rgba(235,0,139,0.15), -7px 0 6px -3px rgba(0,191,242,0.18);}
+  37% {box-shadow: -1px 8px 21px -3px rgba(235,0,139,0.19), -2px -6px 13px -1px rgba(0,191,242,0.2);}
+  50%{box-shadow: -7px 2px 6px -3px rgba(235,0,139,0.18), 7px 0 6px -3px rgba(0,191,242,0.2);}
+  62% {box-shadow: 1px -8px 8px -3px rgba(235,0,139,0.2), 0px 6px 14px -3px rgba(0,191,242,0.21);}
+  75% {box-shadow: 6px 0 13px -2px rgba(235,0,139,0.14), -8px 1px 6px 0px rgba(0,191,242,0.18);}
+  87% {box-shadow: -4px 8px 14px -3px rgba(235,0,139,0.18), -8px -6px 13px -1px rgba(0,191,242,0.2);}
+  100%{box-shadow: -7px 0 6px -3px rgba(235,0,139,0.2), 7px 0 6px -3px rgba(0,191,242,0.2);}
 }
 
 .plane-logo img{

@@ -90,8 +90,8 @@ const App = () => {
   return (
     <>
       <div className="page-title">
-          <div className="logo-container">
-            { messages.length > 0 ? <img className="main-logo anim-left" src="logo.gif" alt="Logo" /> : null }
+          <div className="logo-container ">
+            { messages.length > 0 ? <span class="anim-left"><img className="main-logo" src="logo.gif" alt="Logo" /></span> : null }
             <div className="title">Jini</div>
           </div>
           {/*<img src="logo.gif" className="main-logo" />jini </div>*/}
