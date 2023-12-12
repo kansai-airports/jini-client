@@ -22,18 +22,23 @@ const msg = {
 }
 // const msg_main = '何か手伝いましょうか？';
 
-const ChatGPTChat = () => {
+const App = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [btnActive, setBtnActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState('Pascal Portalier');
   const inputRef = useRef();
+  const messagesEndRef = useRef();
 
   useEffect(() => {
     inputRef.current.focus();
+    scrollToBottom();
   }, [messages]);
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
 
   const currentTimeString = () => {
     const now = new Date();
@@ -57,8 +62,8 @@ const ChatGPTChat = () => {
       { text: 'Loading...', kind:'loading' },
     ]);
 
+
     const result = await predict(_input);
-    console.log(result);
     const response = result.error ? msg.llm_error[lang] : result.payload;
     const kind = result.error ? 'system' : 'bot';
 
@@ -67,6 +72,7 @@ const ChatGPTChat = () => {
       { text: response, kind: kind },
     ]);
     setIsLoading(false);
+    // scrollToBottom();
 
   };
 
@@ -94,7 +100,7 @@ const ChatGPTChat = () => {
           </div>
       </div>
       <div className="chat-container">
-        <div className="chat-messages">
+        <div className="chat-messages" ref={inputRef}>
           {messages.length === 0 ? (
 
             <div className="empty-chat anim-appear">
@@ -119,6 +125,7 @@ const ChatGPTChat = () => {
 
             ))
           )}
+          <div ref={messagesEndRef}></div>
         </div>
         <div className="chat-input-ctn">
           <div className="chat-input">
@@ -143,4 +150,4 @@ const ChatGPTChat = () => {
   );
 };
 
-export default ChatGPTChat;
+export default App;
