@@ -6,6 +6,7 @@ import SystemMessage from './components/SystemMessage';
 import LoadingMessage from './components/LoadingMessage';
 import BotMessage from './components/BotMessage';
 import { predict } from './helpers/llm'
+import {ERROR} from './helpers/const'
 
 import './App.css';
 
@@ -64,8 +65,9 @@ const App = () => {
 
 
     const result = await predict(_input);
-    const response = result.error ? msg.llm_error[lang] : result.payload;
-    const kind = result.error ? 'system' : 'bot';
+    const response = ERROR.isFatal(result.error) ? msg.llm_error[lang] : result.payload;
+    const kind = ERROR.isFatal(result.error) ? 'system' : 'bot';
+    console.log(result);
 
     setMessages((prevMessages) => [
       ...prevMessages.slice(0, -1),
@@ -91,7 +93,7 @@ const App = () => {
     <>
       <div className="page-title">
           <div className="logo-container ">
-            { messages.length > 0 ? <span class="anim-left"><img className="main-logo" src="logo.gif" alt="Logo" /></span> : null }
+            { messages.length > 0 ? <span className="anim-left"><img className="main-logo" src="logo.gif" alt="Logo" /></span> : null }
             <div className="title">Jini</div>
           </div>
           {/*<img src="logo.gif" className="main-logo" />jini </div>*/}

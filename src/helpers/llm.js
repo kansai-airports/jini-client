@@ -1,3 +1,4 @@
+import {ERROR} from './const'
 
 const url = 'http://127.0.0.1:3001/query';
 
@@ -22,11 +23,12 @@ const predict = async function(prompt) {
     }
 
     const data = await response.json();
+
     return data;
 
   } catch (error) {
     console.error('Error:', error);
-    return Promise.resolve({error:1, payload:error})
+    return Promise.resolve({error:ERROR.fatal, payload:error});
   }
 }
 
