@@ -1,12 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faUser } from '@fortawesome/free-solid-svg-icons';
-import UserMessage from './components/UserMessage';
-import SystemMessage from './components/SystemMessage';
-import LoadingMessage from './components/LoadingMessage';
-import BotMessage from './components/BotMessage';
-import { predict } from './helpers/llm'
-import {ERROR} from './helpers/const'
+import { faArrowRight, faUser, faCog } from '@fortawesome/free-solid-svg-icons';
+import UserContext from '../helpers/UserContext';
+import UserMessage from '../components/UserMessage';
+import SystemMessage from '../components/SystemMessage';
+import LoadingMessage from '../components/LoadingMessage';
+import BotMessage from '../components/BotMessage';
+import DropDown from '../components/menu/DropDown';
+
+import { predict } from '../helpers/llm'
+import {ERROR} from '../helpers/const'
 
 import './App.css';
 
@@ -28,7 +31,7 @@ const App = () => {
   const [input, setInput] = useState('');
   const [btnActive, setBtnActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [username, setUsername] = useState('Pascal Portalier');
+  const {user} = useContext(UserContext);
   const inputRef = useRef();
   const messagesEndRef = useRef();
 
@@ -94,11 +97,31 @@ const App = () => {
       <div className="page-title">
           <div className="logo-container ">
             { messages.length > 0 ? <span className="anim-left"><img className="main-logo" src="logo.gif" alt="Logo" /></span> : null }
-            <div className="title">Jini</div>
+            <div className="title"><img src="logo.png" className="name-logo" /></div>
           </div>
-          {/*<img src="logo.gif" className="main-logo" />jini </div>*/}
-          <div className="logo-container">
-            <div className="main-username"> <FontAwesomeIcon icon={faUser} className="user-icon"/>{username}</div>
+          {/*<img src="logo.gif" className="main-logo" /> </div>*/}
+
+          <div className="icon-menu">
+            <div className="icon-menu-item">
+              <DropDown
+                caption={<FontAwesomeIcon icon={faCog} className="user-icon"/>}
+                content={
+                    <>
+                    <span>Item 1</span>
+                    <span>Item 2</span>
+                    <span>Item 3</span>
+                    </>
+                  } />
+            </div>
+            <div className="logo-container icon-menu-item">
+             <DropDown caption={<FontAwesomeIcon icon={faUser} className="user-icon"/>}
+             content={
+                    <>
+                    <span>My Profile</span>
+                    </>
+                  }
+              />
+            </div>
           </div>
       </div>
       <div className="chat-container">
@@ -116,7 +139,7 @@ const App = () => {
           ) : (
             messages.map((message, index) => (
               message.kind == 'user' ? 
-                <UserMessage key={index} username={username} timestamp={message.timestamp} content={message.text} /> 
+                <UserMessage key={index} username={user.name} timestamp={message.timestamp} content={message.text} />
               : message.kind == 'bot' ?
                 <BotMessage key={index} content={message.text} />
               : message.kind == 'system' ?

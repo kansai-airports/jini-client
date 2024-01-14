@@ -3,11 +3,6 @@ body {
   font-family: 'Arial', sans-serif;
 }
 
-@font-face {
-  font-family: 'DancingScript';
-  src: url('./fonts/DancingScript.ttf') format('truetype');
-}
-
 /* pink:EB008B blue:00BFF2 dark:06286A */
 .page-title {
   height: 50px;
@@ -29,7 +24,7 @@ body {
   .main-logo {
     width: 30px;
     height: auto;
-    margin-right: 20px;
+    margin-right: 10px;
     padding: 4px 3px 3px 3px;
     background: white;
     border-radius: 50px;
@@ -39,25 +34,38 @@ body {
     animation: rotateShadowSmall 25s linear infinite; 
   }
 
+  .name-logo{
+/*    width: 60px;*/
+    opacity: 0.4;
+  }
+
   .title {
     color:#000;
-    font-family: 'DancingScript';
     font-size: 26px;
     font-weight: 900;
   }
+
+.icon-menu{
+  display: flex;
+}
+
+.icon-menu-item{
+  margin: 0px 3px;
+  cursor: pointer !important;
+}
 
 .main-username{
   font-size: 15px;
   color: #111;
 }
 .user-icon{
-  color:#777;
+/*  color:#777;*/
   font-size: 16px;
-  margin-right: 7px;
+  margin: 2px 3px 1px;
 }
 
 .plane-logo {
-  padding: 13px 11px 8px 11px;
+  padding: 12px 10px 6px 10px;
   margin: 20px;
   background: white;
   border-radius: 50px;
@@ -93,7 +101,7 @@ body {
 }
 
 .plane-logo img{
-    width: 60px;
+    width: 40px;
     /* height: 60px; */
     /* margin-right: 10px; */
 }
@@ -105,7 +113,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  font-size: 18px;
+  font-size: 16px;
   color: #555;
 }
 
