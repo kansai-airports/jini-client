@@ -15,7 +15,7 @@ const Main = () => {
         <Routes>
           // <Route path="/" element={user?.logged ? <App /> : <Login />} />
           <Route path="/" element={ <App />} />
-          <Route path="/login" element={<Login />} />
+          // <Route path="/login" element={<Login />} />
           <Route element={<NotFound />} />
         </Routes>
 
